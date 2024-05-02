@@ -1,3 +1,72 @@
-[gd_scene format=3 uid="uid://bunyohpobvu8b"]
+[gd_scene load_steps=6 format=3 uid="uid://bunyohpobvu8b"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_olcyp"]
+[ext_resource type="Texture2D" uid="uid://c844yfbd26ea8" path="res://sprites/bug.png" id="1_qyhg0"]
+[ext_resource type="Texture2D" uid="uid://mxxn1wfdfuli" path="res://sprites/10x10.png" id="3_u0b6s"]
+
+[sub_resource type="GDScript" id="GDScript_7hwo8"]
+script/source = "extends StaticBody2D
+
+@onready var collision2D = $CollisionShape2D
+"
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ww8qk"]
 
 [node name="root" type="Node2D"]
+script = ExtResource("1_olcyp")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = -112.0
+offset_top = -96.0
+offset_right = -72.0
+offset_bottom = -56.0
+scale = Vector2(5.65481, 5.45989)
+icon = ExtResource("1_qyhg0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="HSlider" type="HSlider" parent="."]
+custom_minimum_size = Vector2(30, 0)
+offset_left = -208.0
+offset_top = -208.0
+offset_right = -178.0
+offset_bottom = -192.0
+scale = Vector2(13.1624, 4.61662)
+theme_override_constants/center_grabber = 0
+theme_override_constants/grabber_offset = 0
+min_value = 1.0
+max_value = 10.0
+value = 10.0
+
+[node name="CanvasModulate" type="CanvasModulate" parent="HSlider"]
+color = Color(0, 1, 1, 1)
+
+[node name="Label" type="Label" parent="HSlider"]
+offset_left = 15.8026
+offset_top = 41.5888
+offset_right = 55.8026
+offset_bottom = 64.5888
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+script = SubResource("GDScript_7hwo8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 320)
+shape = SubResource("WorldBoundaryShape2D_ww8qk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8, 440)
+scale = Vector2(370.965, -23.512)
+texture = ExtResource("3_u0b6s")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[connection signal="button_up" from="Control/Button" to="." method="_on_button_button_up"]
+[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]

@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://ctn6bk2un2jht"]
+
+[ext_resource type="Texture2D" uid="uid://csfstyjj1bcb6" path="res://sprites/bomb.png" id="1_biri4"]
+[ext_resource type="Script" path="res://CollisionDetector.gd" id="2_fe7ov"]
+[ext_resource type="PhysicsMaterial" uid="uid://cuwtemxq2sx36" path="res://PYHSMATERIAL.tres" id="3_0pe3a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_43th1"]
+radius = 5.97491
+
+[sub_resource type="GDScript" id="GDScript_h30va"]
+script/source = "extends Sprite2D
+
+@onready var rigidbody = $RB
+"
+
+[node name="RB" type="RigidBody2D"]
+position = Vector2(1.52588e-05, 0)
+disable_mode = 2
+mass = 1.56
+physics_material_override = ExtResource("3_0pe3a")
+gravity_scale = 3.44
+script = ExtResource("2_fe7ov")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.729821, 2.36849)
+shape = SubResource("CircleShape2D_43th1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(113, 82)
+scale = Vector2(6.92, 5.04)
+texture = ExtResource("1_biri4")
+script = SubResource("GDScript_h30va")
